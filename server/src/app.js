@@ -25,6 +25,8 @@ app.post('/', async (req, res) => {
   const response = JSON.stringify(records)
     res.send(records)
 })
+
+
 app.use(function errorHandler(error, req, res, next) {
       let response
        if (NODE_ENV === 'production') {
