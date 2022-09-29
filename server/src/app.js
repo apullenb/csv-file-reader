@@ -14,12 +14,16 @@ const parser = parse({columns: true}, function (err, records) {
   console.log(records)
 })
 
-fs.createReadStream(__dirname+'/directory.csv').pipe(parser);
 
 app.use(morgan(morganOption));
 app.use(helmet());
-app.get('/', (req, res) => {
-    res.send('Hello, world!')
+
+
+app.post('/', async (req, res) => {
+  const data = req.body;
+  const records = parse(data, {columns: true});
+  const response = JSON.stringify(records)
+    res.send(records)
 })
 app.use(function errorHandler(error, req, res, next) {
       let response
